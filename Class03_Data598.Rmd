@@ -1,0 +1,48 @@
+---
+title: "Introduction To RMarkdown And Tidyverse"
+author: "Mayur Gupta"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+bibliography: biblography.bib
+output: 
+  bookdown::html_document2:
+    toc: true
+    fig_caption: yes
+---
+
+Loading the libraries tidyverse and bookdown \
+(Add the following lines if the packages are not installed)\
+1) install.packages("tidyverse", dependencies = T)\
+2) install.packages("bookdown", dependencies = T)\
+
+```{r, message = F, echo = F}
+
+library(tidyverse)
+library(bookdown)
+```
+
+**An example of inline command, We add 1 and 3 to get `r 1+3`**
+
+```{r starwars-plot, fig.cap="A ggplot for starwars stuff", , echo = F}
+starwars %>% filter(species == "Human") %>% 
+          ggplot() + aes(x = height, y = mass) + geom_point()
+```
+**We can see in Figure \@ref(fig:starwars-plot) a distribution between height and mass.**
+
+```{r starwars-tbl, results = 'asis', echo = F}
+starwars%>% filter(species == "Human") %>% 
+            select(name, height, mass, homeworld) %>% 
+            knitr::kable(caption = "A knitr table of starwars")
+```
+
+**We can see in Table \@ref(tab:starwars-tbl), A part of the data from the starwars dataset.**\
+
+```{r forceAwakens, echo=FALSE, fig.cap="Starwars image"}
+knitr::include_graphics("StarWars.jpg")
+```
+**May the force be with you \@ref(fig:forceAwakens)**
+
+
+
+**A paper in IEEE journal named: "Reproducible research for scientific computing: Tools and strategies for changing the culture". [@6171147].**
+
+**#References cites**
